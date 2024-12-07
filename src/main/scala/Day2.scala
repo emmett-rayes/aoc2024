@@ -20,4 +20,12 @@ object Day2 {
             }
         }
     }
+
+    object Part2 {
+        private type Output = Int
+
+        def solve(input: Input): Output = {
+            ???
+        }
+    }
 }
