@@ -21,4 +21,11 @@ object Day1 {
                 .zip(input._2.sorted)
                 .foldLeft(0)((sum, pair) => sum + math.abs(pair._1 - pair._2))
     }
+
+    object Part2 {
+        private type Output = Any
+
+        def solve(input: Input): Output =
+            ???
+    }
 }
