@@ -8,7 +8,16 @@ object Day2 {
         private type Output = Int
 
         def solve(input: Input): Output = {
-            ???
+            input.count { report =>
+                if report.size <= 1 then true
+                else
+                    val increasing = report.head < report.tail.head
+                    report.zip(report.drop(1)).forall { (prev, curr) =>
+                        val monotonicity = if increasing then prev < curr else prev > curr
+                        val distance = 1 <= math.abs(curr - prev) && math.abs(curr - prev) <= 3
+                        monotonicity && distance
+                    }
+            }
         }
     }
 }
