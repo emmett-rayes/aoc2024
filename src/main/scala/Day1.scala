@@ -23,9 +23,14 @@ object Day1 {
     }
 
     object Part2 {
-        private type Output = Any
+        private type Output = Int
 
         def solve(input: Input): Output =
-            ???
+            val frequencies = input._2
+                .groupBy(identity)
+                .view.mapValues(_.size)
+                .toMap.withDefaultValue(0)
+
+            input._1.foldLeft(0)((sum, a) => sum + a * frequencies(a))
     }
 }
