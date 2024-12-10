@@ -52,4 +52,10 @@ object Day4 {
                 + diags.map(search("SAMX", _)).sum
         }
     }
+
+    object Part2 {
+        private type Output = Int
+
+        def solve(input: Input): Output = ???
+    }
 }
