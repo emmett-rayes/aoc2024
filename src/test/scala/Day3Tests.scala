@@ -15,7 +15,7 @@ class Day3Tests extends munit.FunSuite {
 
     test("part1 solution") {
         val input = os.read(os.Path(getClass.getResource("Day3").toURI))
-        val expected = 0
+        val expected = 188741603
         val obtained = Day3.Part1.solve(Day3.parse(input))
         assertEquals(clue(obtained), expected)
     }
