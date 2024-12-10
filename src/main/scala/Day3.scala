@@ -41,4 +41,10 @@ object Day3 {
             results.map(r => r._1 * r._2).sum
         }
     }
+
+    object Part2 {
+        private type Output = Int
+
+        def solve(input: Input): Output = ???
+    }
 }
