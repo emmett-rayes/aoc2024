@@ -56,6 +56,55 @@ object Day4 {
     object Part2 {
         private type Output = Int
 
-        def solve(input: Input): Output = ???
+        private def search[V](word: String, chars: Iterable[(Char, V)]): List[V] = {
+            import scala.collection.mutable
+
+            val result = mutable.Buffer.empty[V]
+            var searching = word
+            for (c, v) <- chars do {
+                if c != searching.head then searching = word
+                if c == searching.head then searching = searching.tail
+                if searching.isEmpty then
+                    result.append(v)
+                    searching = word
+            }
+            result.toList
+        }
+
+        private def diagonals(input: Input, half: "upper" | "lower", reversed: Boolean, strict: Boolean) = {
+            def strictness(i: Int, j: Int) = if strict then (j + i) != j else true
+            input.indices.collect { case i =>
+                input.transpose.indices.collect {
+                    case j if strictness(i, j) && j < input.size - i =>
+                        val (x, y) = half match
+                            case "upper" => (j, i + j)
+                            case "lower" => (i + j, j)
+                        if reversed then (input(x).reverse(y), (x, input(x).size - y - 1)) else (input(x)(y), (x, y))
+                }
+            }
+        }
+
+        def solve(input: Input): Output = {
+            val upper = diagonals(input, "upper", reversed = false, strict = false)
+            val upperR = diagonals(input, "upper", reversed = true, strict = false)
+            val lower = diagonals(input, "lower", reversed = false, strict = true)
+            val lowerR = diagonals(input, "lower", reversed = true, strict = true)
+
+            val diags = upper ++ lower
+            val diagsOccurrences = diags
+                .flatMap(it =>
+                    search("MAS", it).map(i => it(it.map(_._2).toList.indexOf(i) - 1))
+                        ++ search("SAM", it).map(i => it(it.map(_._2).toList.indexOf(i) - 1))
+                )
+
+            val diagsR = upperR ++ lowerR
+            val diagsROccurrences = diagsR
+                .flatMap(it =>
+                    search("MAS", it).map(i => it(it.map(_._2).toList.indexOf(i) - 1))
+                        ++ search("SAM", it).map(i => it(it.map(_._2).toList.indexOf(i) - 1))
+                )
+
+            diagsOccurrences.intersect(diagsROccurrences).size
+        }
     }
 }
