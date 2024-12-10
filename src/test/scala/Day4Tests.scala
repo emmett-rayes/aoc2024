@@ -29,4 +29,30 @@ class Day4Tests extends munit.FunSuite {
         val obtained = Day4.parse(input)
         assertEquals(clue(obtained), expected)
     }
+
+    test("part1 example") {
+        val input =
+            """|MMMSXXMASM
+               |MSAMXMSMSA
+               |AMXSXMAAMM
+               |MSAMASMSMX
+               |XMASAMXAMM
+               |XXAMMXXAMA
+               |SMSMSASXSS
+               |SAXAMASAAA
+               |MAMMMXMMMM
+               |MXMXAXMASX
+               |""".stripMargin
+
+        val expected = 18
+        val obtained = Day4.Part1.solve(Day4.parse(input))
+        assertEquals(clue(obtained), expected)
+    }
+
+    test("part1 solution") {
+        val input = os.read(os.Path(getClass.getResource("Day4").toURI))
+        val expected = 0
+        val obtained = Day4.Part1.solve(Day4.parse(input))
+        assertEquals(clue(obtained), expected)
+    }
 }

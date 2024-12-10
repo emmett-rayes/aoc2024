@@ -4,4 +4,9 @@ object Day4 {
     def parse(input: String): Input =
         input.split("\n").map(_.toCharArray.toList).toList
 
+    object Part1 {
+        private type Output = Int
+
+        def solve(input: Input): Output = ???
+    }
 }
